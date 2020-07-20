@@ -1,0 +1,15 @@
+$font-family-base: 'Poppins', sans-serif;
+$brand-primary: #108973;
+$brand-secondary: #ff4136;
+$body-bg: #fff;
+$body-color: #131314;
+$light: #ffff;
+$dark: #000;
+
+$theme-colors: (
+  'primary': $brand-primary,
+  'danger': #ff4136,
+);
+
+$easing: cubic-bezier(0.645, 0.045, 0.355, 1);
+$transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);

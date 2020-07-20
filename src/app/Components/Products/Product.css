@@ -1,0 +1,27 @@
+div.scrollmenu {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+  text-align: center;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+.product {
+  height: 200px;
+  width: 200px;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+.product-list {
+  height: 200px;
+}
