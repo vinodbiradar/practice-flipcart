@@ -10,10 +10,11 @@ import {
 
 // initialState for sign-in
 const initialState = {
+  user: [],
   signInMessage: "",
   signInError: false,
   signInLoading: false,
-  signInSuccess: "",
+  signInSuccess: false,
   signUpMessage: "",
   signUpSuccess: "",
   signUpLoading: false,
@@ -27,14 +28,16 @@ const authReducer = (state = initialState, action) => {
 
     case SIGNINERROR:
       return {
-        state,
+        ...state,
         signInError: true,
+        signInSuccess: false,
         signInMessage: action.message,
       };
 
     case SIGNINSUCCESS:
       return {
-        state,
+        ...state,
+        user: action.payload,
         signInSuccess: true,
         signInMessage: "Sign In Success",
       };
@@ -43,18 +46,18 @@ const authReducer = (state = initialState, action) => {
       return initialState;
 
     case SIGNUPLOADING:
-      return { state, signUpLoading: true };
+      return { ...state, signUpLoading: true };
 
     case SIGNUPSUCCESS:
       return {
-        state,
+        ...state,
         signUpSuccess: true,
         signUpMessage: "Sign Up Success",
       };
 
     case SIGNUPERROR:
       return {
-        state,
+        ...state,
         signUpError: true,
         signUpMessage: action.message,
       };

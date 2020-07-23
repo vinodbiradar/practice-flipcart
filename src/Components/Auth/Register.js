@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { signUp } from "../../store/Actions/auth.action";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  toast.configure();
   function registerUser() {
     props.signUp(name, email, password);
   }
 
   if (props.signUpSuccess === true) {
-    props.history.push("./login");
+    toast("Register Succefull!", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000,
+    });
+    props.history.push("./");
   }
   return (
     <div className="row">

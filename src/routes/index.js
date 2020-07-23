@@ -6,6 +6,7 @@ import More from "../components/more";
 import Cart from "../components/cart";
 import Home from "../components/layouts/Home";
 import Dashboard from "../components/layouts/Dashboard";
+import HeadPhone from "../components/products/items/HeadPhone";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
   {
     path: "/dashboard",
     component: Dashboard,
+    exact: true,
+  },
+  {
+    path: "/headPhone",
+    component: HeadPhone,
     exact: true,
   },
 ];

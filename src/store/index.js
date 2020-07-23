@@ -5,7 +5,6 @@ import sagas from "./sagas";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const initialState = {};
 const middleware = [sagaMiddleware];
 
 const composedEnhancers =
@@ -13,7 +12,6 @@ const composedEnhancers =
 
 const store = createStore(
   rootReducer,
-  initialState,
   composedEnhancers(applyMiddleware(...middleware))
 );
 

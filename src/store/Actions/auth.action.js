@@ -11,6 +11,10 @@ import {
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAILURE,
+  UPLOAD_REQUEST,
+  UPLOAD_SUCCESS,
+  UPLOAD_PROGRESS,
+  UPLOAD_FAILURE,
 } from "./constantType";
 
 // Sign-in actions
@@ -19,8 +23,8 @@ const signIn = (email, password) => {
   return { type: SIGNIN, payload: { email, password } };
 };
 
-const signInSuccess = () => {
-  return { type: SIGNINSUCCESS };
+const signInSuccess = (user) => {
+  return { type: SIGNINSUCCESS, payload: user };
 };
 
 const signInError = (message) => {
@@ -65,6 +69,19 @@ const productError = (message) => {
   return { type: FETCH_PRODUCTS_FAILURE, message };
 };
 
+// Uplaod actions
+const uploadFile = () => {
+  return { type: UPLOAD_REQUEST };
+};
+
+const uploadFileSuccess = () => {
+  return { type: UPLOAD_SUCCESS };
+};
+
+const uploadFileError = (message) => {
+  return { type: UPLOAD_FAILURE, message };
+};
+
 export {
   signIn,
   signInSuccess,
@@ -73,8 +90,12 @@ export {
   signUp,
   signUpSuccess,
   signUpError,
+  clearSignInState,
   signUpLoading,
   fetchProducts,
   productSuccess,
   productError,
+  uploadFile,
+  uploadFileSuccess,
+  uploadFileError,
 };

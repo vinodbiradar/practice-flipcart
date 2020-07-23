@@ -1,41 +1,38 @@
 import {
-  FETCH_PRODUCTS_REQUEST,
-  FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_FAILURE,
+  UPLOAD_REQUEST,
+  UPLOAD_PROGRESS,
+  UPLOAD_SUCCESS,
+  UPLOAD_FAILURE,
 } from "../Actions/constantType";
 
 const initialState = {
   loading: false,
-  loaded: false,
-  products: [],
+  files: [],
   error: null,
 };
 
 //defining the reducers function
-const productReducer = (state = initialState, action) => {
+const uploadReducer = (state = initialState, action) => {
   console.log("action", action);
   switch (action.type) {
-    case FETCH_PRODUCTS_REQUEST:
+    case UPLOAD_REQUEST:
       return {
         ...state,
         loading: true,
-        loaded: false,
       };
 
-    case FETCH_PRODUCTS_SUCCESS:
+    case UPLOAD_SUCCESS:
       return {
         ...state,
         loading: false,
-        loaded: true,
-        products: action.payload,
+        files: action.payload,
       };
 
-    case FETCH_PRODUCTS_FAILURE:
+    case UPLOAD_FAILURE:
       return {
         ...state,
         loading: false,
-        loaded: false,
-        products: [],
+        files: [],
       };
 
     default:
@@ -43,4 +40,4 @@ const productReducer = (state = initialState, action) => {
   }
 };
 
-export default productReducer;
+export default uploadReducer;

@@ -2,24 +2,40 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signIn } from "../../store/Actions/auth.action";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [sign, setSignIn] = useState("");
 
+  toast.configure();
+
   function loginUser() {
     props.signIn(email, password);
   }
 
-  useEffect(() => {
-    setSignIn(props.signInSuccess);
-  }, [props.signInSuccess]);
+  // useEffect(() => {
+  //   setSignIn(props.signInSuccess);
+  // }, [props.signInSuccess]);
+
+  sessionStorage.setItem("signInSuccess", props.signInSuccess);
+  let signInSuccess = sessionStorage.getItem("signInSuccess");
 
   if (props.signInSuccess === true) {
+    
+    // toast("Login Succefull!", {
+    //   position: toast.POSITION.TOP_CENTER,
+    //   autoClose: 3000,
+    // });
+
     props.history.push("./dashboard");
   }
-
+  if (signInSuccess === "true") {
+    props.history.push("./dashboard");
+  }
+  console.log(props);
   return (
     <div className="row">
       <div className="col-md-6 offset-md-3">
@@ -57,7 +73,11 @@ const SignIn = (props) => {
           Login
         </button>
         <span className="text-center">
-          {props.signInMessage && <div>{props.signInMessage}</div>}
+          {props.signInMessage &&
+            toast(`${props.signInMessage}`, {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 5000,
+            })}
         </span>
       </div>
     </div>
@@ -70,8 +90,8 @@ const mapStateToProps = (state) => ({
   signInSuccess: state.authReducer.signInSuccess,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  signIn: (email, password) => dispatch(signIn(email, password)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   signIn: (email, password) => dispatch(signIn(email, password)),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, { signIn })(SignIn);

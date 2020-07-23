@@ -5,7 +5,7 @@ export class Product extends Component {
   render() {
     return (
       <div>
-        <div class="scrollmenu">
+        <div className="scrollmenu">
           <a href="#home">Electronics</a>
           <a href="#news">Mobiles</a>
           <a href="#contact">Footwears</a>

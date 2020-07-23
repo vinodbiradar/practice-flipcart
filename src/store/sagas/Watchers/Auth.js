@@ -3,6 +3,7 @@ import {
   SIGNIN,
   SIGNUP,
   FETCH_PRODUCTS_REQUEST,
+  UPLOAD_REQUEST,
 } from "../../Actions/constantType";
 import {
   signInSuccess,
@@ -11,27 +12,25 @@ import {
   signUpSuccess,
   signUpError,
   signUpLoading,
-  fetchingProduct,
-  productFetchRequest,
-  productSuccess,
-  productError,
 } from "../../Actions/auth.action";
-import { app } from "firebase/app";
-import { eventChannel } from "redux-saga";
-
+import firebase from "firebase";
 import Firebase from "../../../firebase/Firebase";
 
 //Sign-in Sagas
 function* signIn(actions) {
   try {
-    yield put(signInLoading());
-    const firebase = new Firebase();
+    // Show fetching data message
     yield put(signUpLoading());
+
+    // When I click sign in buttonn send request to firebase
+    const firebase = new Firebase();
     const user = yield firebase.doSignInWithEmailAndPassword(
       actions.payload.email,
       actions.payload.password
     );
-    yield put(signInSuccess());
+
+    // Show success message
+    yield put(signInSuccess(user));
   } catch (error) {
     yield put(signInError(error.message));
   }
@@ -54,23 +53,29 @@ function* signUp(actions) {
 
 //Product Sagas
 function* fetchingProducts() {
-  const ref = app.firestore().collection("products");
-  const channel = eventChannel((emit) => ref.onSnapshot(emit));
+  const database = firebase.database();
+  const ref = database.ref("products");
+  ref.on("value", gotData, errorData);
+}
 
-  try {
-    while (true) {
-      const data = yield take(channel);
-      yield put(productSuccess(data));
-    }
-  } catch (err) {
-    yield put(productError(err));
-  }
+function gotData(data) {
+  console.log(data.val());
+}
+
+function errorData(error) {
+  console.log("Error", error);
+}
+
+//Upload Sagas
+function* uploadFiles() {
+  // console.log("upload files works");
 }
 
 export default function* watchSignInSaga() {
   yield all([
     takeLatest(SIGNIN, signIn),
-    takeLatest(SIGNUP, signUp),
-    takeLatest(FETCH_PRODUCTS_REQUEST, fetchingProducts),
+    // takeLatest(SIGNUP, signUp),
+    // takeLatest(FETCH_PRODUCTS_REQUEST, fetchingProducts),
+    // takeLatest(UPLOAD_REQUEST, uploadFiles),
   ]);
 }
