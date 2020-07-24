@@ -13,7 +13,7 @@ const initialState = {
 
 //defining the reducers function
 const uploadReducer = (state = initialState, action) => {
-  console.log("action", action);
+  console.log("uploadReducer action", action);
   switch (action.type) {
     case UPLOAD_REQUEST:
       return {

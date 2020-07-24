@@ -24,7 +24,10 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SIGNINLOADING:
-      return { state, signInLoading: true };
+      return {
+        ...state,
+        signInLoading: true,
+      };
 
     case SIGNINERROR:
       return {

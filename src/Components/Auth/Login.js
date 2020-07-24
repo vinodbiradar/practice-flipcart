@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { signIn } from "../../store/Actions/auth.action";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { css } from "@emotion/core";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const SignIn = (props) => {
   const [email, setEmail] = useState("");
@@ -16,6 +18,12 @@ const SignIn = (props) => {
     props.signIn(email, password);
   }
 
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
+
   // useEffect(() => {
   //   setSignIn(props.signInSuccess);
   // }, [props.signInSuccess]);
@@ -24,23 +32,31 @@ const SignIn = (props) => {
   let signInSuccess = sessionStorage.getItem("signInSuccess");
 
   if (props.signInSuccess === true) {
-    
     // toast("Login Succefull!", {
     //   position: toast.POSITION.TOP_CENTER,
     //   autoClose: 3000,
     // });
 
-    props.history.push("./dashboard");
+    props.history.push("/admin");
   }
+
   if (signInSuccess === "true") {
-    props.history.push("./dashboard");
+    props.history.push("/admin");
   }
-  console.log(props);
+
+  console.log("props.signInLoading", props.signInLoading);
   return (
     <div className="row">
       <div className="col-md-6 offset-md-3">
         <span className="text-center">
-          {props.signInLoading && <div>Loading ...</div>}
+          {props.signInLoading && (
+            <ClipLoader
+              css={override}
+              size={150}
+              color={"#123abc"}
+              loading={props.signInLoading}
+            />
+          )}
         </span>
         <div className="form-group mt-4">
           <label for="exampleInputEmail1">Email address</label>
@@ -72,13 +88,6 @@ const SignIn = (props) => {
         >
           Login
         </button>
-        <span className="text-center">
-          {props.signInMessage &&
-            toast(`${props.signInMessage}`, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 5000,
-            })}
-        </span>
       </div>
     </div>
   );

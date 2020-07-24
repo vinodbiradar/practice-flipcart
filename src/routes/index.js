@@ -35,7 +35,7 @@ const routes = [
     exact: true,
   },
   {
-    path: "/dashboard",
+    path: "/admin",
     component: Dashboard,
     exact: true,
   },

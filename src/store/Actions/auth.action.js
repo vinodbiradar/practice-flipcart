@@ -70,8 +70,8 @@ const productError = (message) => {
 };
 
 // Uplaod actions
-const uploadFile = () => {
-  return { type: UPLOAD_REQUEST };
+const uploadFile = (name, price, description, file) => {
+  return { type: UPLOAD_REQUEST, name, price, description, file };
 };
 
 const uploadFileSuccess = () => {

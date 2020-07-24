@@ -1,4 +1,4 @@
-import { put, takeLatest, all, take } from "redux-saga/effects";
+import { put, takeLatest, all, take, on } from "redux-saga/effects";
 import {
   SIGNIN,
   SIGNUP,
@@ -67,15 +67,43 @@ function errorData(error) {
 }
 
 //Upload Sagas
-function* uploadFiles() {
-  // console.log("upload files works");
+function* uploadFile(action) {
+  var storageRef = firebase.storage().ref();
+  var metadata = {
+    contentType: "image/jpeg",
+  };
+  var uploadTask = storageRef.child(`${action.file.name}`).put(action.file);
+
+  uploadTask.on(
+    "state_changed",
+    (snapshot) => {
+      // progrss function ....
+      const progress = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
+      // this.setState({ progress });
+    },
+    (error) => {
+      // error function ....
+      console.log(error);
+    },
+    () => {
+      // complete function ....
+      storageRef
+        .child(action.file.name)
+        .getDownloadURL()
+        .then((url) => {
+          console.log(url);
+        });
+    }
+  );
 }
 
 export default function* watchSignInSaga() {
   yield all([
     takeLatest(SIGNIN, signIn),
-    // takeLatest(SIGNUP, signUp),
-    // takeLatest(FETCH_PRODUCTS_REQUEST, fetchingProducts),
-    // takeLatest(UPLOAD_REQUEST, uploadFiles),
+    takeLatest(SIGNUP, signUp),
+    takeLatest(FETCH_PRODUCTS_REQUEST, fetchingProducts),
+    takeLatest(UPLOAD_REQUEST, uploadFile),
   ]);
 }

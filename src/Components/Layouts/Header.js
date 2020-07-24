@@ -1,17 +1,25 @@
 import React, { Component } from "react";
 import "./Header.css";
 import logoImage from "./../../assets/flipkart-logo.png";
-import { Link } from "react-router-dom";
-import { CLEARSIGNINSTATE } from "../../store/Actions/constantType";
+import { Link, withRouter } from "react-router-dom";
 
 export class Header extends Component {
-  signOut() {
+  signOut(e) {
+    e.preventDefault();
     sessionStorage.clear();
+    this.props.history.push("/login");
   }
 
   render() {
     let loggedin = sessionStorage.getItem("signInSuccess");
+    if (loggedin === null) loggedin = "false";
+
+    let signInSuccess = this.props.signInSuccess;
+    if (signInSuccess === undefined) signInSuccess = false;
+
     console.log(loggedin);
+    console.log(signInSuccess);
+
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-primary">
@@ -46,12 +54,17 @@ export class Header extends Component {
               </button>
             </form>
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item active">
-                <Link to="/login" className="nav-link">
-                  Login <span className="sr-only">(current)</span>
-                </Link>
-              </li>
-              {loggedin === "false" ? (
+              {loggedin === "false" && signInSuccess === false ? (
+                <li className="nav-item active">
+                  <Link to="/login" className="nav-link">
+                    Login <span className="sr-only">(current)</span>
+                  </Link>
+                </li>
+              ) : (
+                " "
+              )}
+
+              {loggedin === "false" && signInSuccess === false ? (
                 <li>
                   <Link to="/register" className="nav-link">
                     Register <span className="sr-only">(current)</span>
@@ -61,12 +74,12 @@ export class Header extends Component {
                 ""
               )}
 
-              {loggedin === "true" ? (
+              {loggedin === "true" || signInSuccess === true ? (
                 <li className="nav-item active">
                   <Link
-                    to="/more"
+                    // to="#"
                     className="nav-link"
-                    onClick={() => this.signOut()}
+                    onClick={(e) => this.signOut(e)}
                   >
                     Logout <span className="sr-only">(current)</span>
                   </Link>
@@ -92,4 +105,4 @@ export class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

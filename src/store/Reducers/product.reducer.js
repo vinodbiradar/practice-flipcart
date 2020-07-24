@@ -19,14 +19,14 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        loaded: false,
+        // loaded: false,
       };
 
     case FETCH_PRODUCTS_SUCCESS:
       return {
         ...state,
         loading: false,
-        loaded: true,
+        // loaded: true,
         products: action.payload,
       };
 
@@ -34,7 +34,7 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        loaded: false,
+        // loaded: false,
         products: [],
       };
 
