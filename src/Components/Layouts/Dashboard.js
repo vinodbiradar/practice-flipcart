@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { fetchProducts, signIn } from "../../store/Actions/auth.action";
-import { uploadFile } from "../../store/Actions/auth.action";
+import { uploadFile, uploadProductData } from "../../store/Actions/auth.action";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -12,7 +12,8 @@ const Dashboard = (props) => {
   const [file, setFile] = useState("");
 
   function sendData() {
-    props.uploadFile(name, price, description, file);
+    props.uploadFile(file);
+    props.uploadProductData(name, price, description);
   }
 
   toast.configure();
@@ -98,8 +99,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  uploadFile: (name, price, description, file) =>
-    dispatch(uploadFile(name, price, description, file)),
+  uploadFile: (file) => dispatch(uploadFile(file)),
+  uploadProductData: (name, price, description) =>
+    dispatch(uploadProductData(name, price, description)),
   signIn: (email, password) => dispatch(signIn(email, password)),
   fetchProducts: () => dispatch(fetchProducts()),
 });

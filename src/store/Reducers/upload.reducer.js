@@ -3,12 +3,14 @@ import {
   UPLOAD_PROGRESS,
   UPLOAD_SUCCESS,
   UPLOAD_FAILURE,
+  UPLOAD_PRODUCT_DATA,
 } from "../Actions/constantType";
 
 const initialState = {
   loading: false,
   files: [],
   error: null,
+  productData: [],
 };
 
 //defining the reducers function
@@ -26,6 +28,12 @@ const uploadReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         files: action.payload,
+      };
+    case UPLOAD_PRODUCT_DATA:
+      return {
+        ...state,
+        loading: false,
+        productData: action.payload,
       };
 
     case UPLOAD_FAILURE:

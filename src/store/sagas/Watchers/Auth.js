@@ -4,6 +4,7 @@ import {
   SIGNUP,
   FETCH_PRODUCTS_REQUEST,
   UPLOAD_REQUEST,
+  UPLOAD_PRODUCT_DATA,
 } from "../../Actions/constantType";
 import {
   signInSuccess,
@@ -15,6 +16,7 @@ import {
 } from "../../Actions/auth.action";
 import firebase from "firebase";
 import Firebase from "../../../firebase/Firebase";
+import { act } from "react-dom/test-utils";
 
 //Sign-in Sagas
 function* signIn(actions) {
@@ -59,15 +61,17 @@ function* fetchingProducts() {
 }
 
 function gotData(data) {
-  console.log(data.val());
+  // console.log(data.val());
 }
 
 function errorData(error) {
   console.log("Error", error);
 }
 
+var imageUrl = [];
 //Upload Sagas
 function* uploadFile(action) {
+  // console.log("Action in Sagas", action);
   var storageRef = firebase.storage().ref();
   var metadata = {
     contentType: "image/jpeg",
@@ -93,10 +97,33 @@ function* uploadFile(action) {
         .child(action.file.name)
         .getDownloadURL()
         .then((url) => {
-          console.log(url);
+          console.log("image url am getting", url);
+          this.uploadProductData(action, url);
         });
     }
   );
+}
+
+function* uploadProductData(action, url) {
+  console.log("Product data am getting", action);
+  let databaseRef = firebase.database();
+  databaseRef
+    .ref("ProductDescription/")
+    // .child("action")
+    .set({
+      name: action.name,
+      price: action.price,
+      description: action.description,
+      ImageUrl: url,
+    })
+    .then((data) => {
+      //success callback
+      console.log("data ", data);
+    })
+    .catch((error) => {
+      //error callback
+      console.log("error ", error);
+    });
 }
 
 export default function* watchSignInSaga() {
@@ -105,5 +132,6 @@ export default function* watchSignInSaga() {
     takeLatest(SIGNUP, signUp),
     takeLatest(FETCH_PRODUCTS_REQUEST, fetchingProducts),
     takeLatest(UPLOAD_REQUEST, uploadFile),
+    // takeLatest(UPLOAD_PRODUCT_DATA, uploadProductData),
   ]);
 }

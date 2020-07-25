@@ -13,7 +13,6 @@ const initialState = {
 
 //defining the reducers function
 const productReducer = (state = initialState, action) => {
-  console.log("action", action);
   switch (action.type) {
     case FETCH_PRODUCTS_REQUEST:
       return {

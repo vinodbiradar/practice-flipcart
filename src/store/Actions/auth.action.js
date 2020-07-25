@@ -15,11 +15,11 @@ import {
   UPLOAD_SUCCESS,
   UPLOAD_PROGRESS,
   UPLOAD_FAILURE,
+  UPLOAD_PRODUCT_DATA,
 } from "./constantType";
 
 // Sign-in actions
 const signIn = (email, password) => {
-  console.log("Actions here", email, password);
   return { type: SIGNIN, payload: { email, password } };
 };
 
@@ -70,8 +70,8 @@ const productError = (message) => {
 };
 
 // Uplaod actions
-const uploadFile = (name, price, description, file) => {
-  return { type: UPLOAD_REQUEST, name, price, description, file };
+const uploadFile = (file) => {
+  return { type: UPLOAD_REQUEST, file };
 };
 
 const uploadFileSuccess = () => {
@@ -80,6 +80,11 @@ const uploadFileSuccess = () => {
 
 const uploadFileError = (message) => {
   return { type: UPLOAD_FAILURE, message };
+};
+
+const uploadProductData = (name, price, description) => {
+  console.log("Upload data", name, price, description);
+  return { type: UPLOAD_PRODUCT_DATA, name, price, description };
 };
 
 export {
@@ -98,4 +103,5 @@ export {
   uploadFile,
   uploadFileSuccess,
   uploadFileError,
+  uploadProductData,
 };
