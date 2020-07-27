@@ -8,6 +8,7 @@ import {
 
 const initialState = {
   loading: false,
+  uploadSuccess: false,
   files: [],
   error: null,
   productData: [],
@@ -21,6 +22,7 @@ const uploadReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        uploadSuccess: false,
       };
 
     case UPLOAD_SUCCESS:
@@ -28,19 +30,23 @@ const uploadReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         files: action.payload,
+        uploadSuccess: true,
       };
-    case UPLOAD_PRODUCT_DATA:
-      return {
-        ...state,
-        loading: false,
-        productData: action.payload,
-      };
+      
+    // case UPLOAD_PRODUCT_DATA:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     productData: action.payload,
+    //     uploadSuccess: false,
+    //   };
 
     case UPLOAD_FAILURE:
       return {
         ...state,
         loading: false,
         files: [],
+        uploadSuccess: false,
       };
 
     default:

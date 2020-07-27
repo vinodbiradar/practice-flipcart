@@ -12,9 +12,17 @@ const Dashboard = (props) => {
   const [file, setFile] = useState("");
 
   function sendData() {
-    props.uploadFile(file);
-    props.uploadProductData(name, price, description);
+    let productInfo = {
+      name: name,
+      price: price,
+      description: description,
+      file: file,
+    };
+    props.uploadFile(productInfo);
+    // props.uploadProductData(name, price, description);
   }
+
+  console.log("Props ARE ", props);
 
   toast.configure();
 
