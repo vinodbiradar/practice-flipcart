@@ -29,16 +29,14 @@ const uploadReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        files: action.payload,
         uploadSuccess: true,
       };
-      
-    // case UPLOAD_PRODUCT_DATA:
+    // case FETCH_PRODUCTS:
     //   return {
     //     ...state,
-    //     loading: false,
+    //     loading: true,
+    //     // loaded: false,
     //     productData: action.payload,
-    //     uploadSuccess: false,
     //   };
 
     case UPLOAD_FAILURE:

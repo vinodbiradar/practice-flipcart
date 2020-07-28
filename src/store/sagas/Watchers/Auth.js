@@ -70,64 +70,52 @@ function errorData(error) {
   console.log("Error", error);
 }
 
-var imageUrl = [];
 //Upload Sagas
 function* uploadFile(action) {
-  console.log("Action in Sagas", action, action.file);
   var storageRef = firebase.storage().ref();
-  var metadata = {
-    contentType: "image/jpeg",
-  };
+  let databaseRef = firebase.database();
+
   var uploadTask = storageRef
     .child(`${action.file.name}`)
     .put(action.file.file);
+  uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+    const imageUrl = downloadURL;
+    console.log("URL:" + imageUrl);
+    // console.log(uploadTask.snapshot.ref.downloadURL());
+    databaseRef.ref("ProductDescription/").push({
+      name: action.file.name,
+      price: action.file.price,
+      description: action.file.description,
+      file: downloadURL,
+    });
+  });
+  yield put(uploadFileSuccess());
+}
 
-  uploadTask.on(
-    "state_changed",
-    (snapshot) => {
-      // progrss function ....
-      const progress = Math.round(
-        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      );
-      // this.setState({ progress });
-    },
-    (error) => {
-      // error function ....
-      console.log(error);
-    },
-    () => {
-      // complete function ....
-      storageRef
-        .child(action.file.name)
-        .getDownloadURL()
-        .then((url) => {
-          console.log("image url am getting", url);
-
-          //function* uploadProductData(action, url) {
-          console.log("Product data am getting", action);
-          let databaseRef = firebase.database();
-          databaseRef
-            .ref("ProductDescription/")
-            // .child("action")
-            .push({
-              name: action.file.name,
-              price: action.file.price,
-              description: action.file.description,
-              file: url,
-            })
-            .then((data) => {
-              //success callback
-              console.log("data ", data);
-              // this.uploadFileSuccess();
-            })
-            .catch((error) => {
-              //error callback
-              console.log("error ", error);
-            });
-          // }
-        });
-    }
-  );
+function* insertProduct(action, url) {
+  console.log("insert product", action);
+  let databaseRef = firebase.database();
+  databaseRef
+    .ref("ProductDescription/")
+    // .child("action")
+    .push({
+      name: action.file.name,
+      price: action.file.price,
+      description: action.file.description,
+      file: url,
+    })
+    .then(
+      (uploadFileSuccess = (data) => {
+        //success callback
+        console.log("data ", data);
+        // this.uploadFileSuccess();
+      })
+    )
+    .catch((error) => {
+      //error callback
+      console.log("error ", error);
+    });
+  yield put(uploadFileSuccess());
 }
 
 export default function* watchSignInSaga() {

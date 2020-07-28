@@ -4,6 +4,7 @@ import { fetchProducts, signIn } from "../../store/Actions/auth.action";
 import { uploadFile, uploadProductData } from "../../store/Actions/auth.action";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link, withRouter } from "react-router-dom";
 
 const Dashboard = (props) => {
   const [name, setName] = useState("");
@@ -22,17 +23,18 @@ const Dashboard = (props) => {
     // props.uploadProductData(name, price, description);
   }
 
-  console.log("Props ARE ", props);
-
   toast.configure();
-
-  console.log(props.signInSuccess, "signInSuccess");
 
   if (props.signInSuccess === true) {
     toast("Login Succefull!", {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 3000,
     });
+  }
+  console.log(props);
+  if (props.state.uploadReducer.uploadSuccess === true) {
+    console.log("uploadFileSuccess");
+    props.history.push("/");
   }
 
   return (
@@ -96,14 +98,15 @@ const Dashboard = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  productError: state.productReducer.productError,
-  fetchingProduct: state.productReducer.fetchingProduct,
-  productFetchRequest: state.productReducer.productFetchRequest,
-  productSuccess: state.productReducer.signUpSuccess,
-  fileUpload: state.uploadReducer.uploadFile,
-  fileUploadSuccess: state.uploadReducer.uploadFileSuccess,
-  fileUploadFailure: state.uploadReducer.uploadFileError,
-  signInSuccess: state.authReducer.signInSuccess,
+  state,
+  // productError: state.productReducer.productError,
+  // fetchingProduct: state.productReducer.fetchingProduct,
+  // productFetchRequest: state.productReducer.productFetchRequest,
+  // productSuccess: state.productReducer.signUpSuccess,
+  // fileUpload: state.uploadReducer.uploadFile,
+  // fileUploadSuccess: state.uploadReducer.uploadFileSuccess,
+  // fileUploadFailure: state.uploadReducer.uploadFileError,
+  // signInSuccess: state.authReducer.signInSuccess,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -114,4 +117,6 @@ const mapDispatchToProps = (dispatch) => ({
   fetchProducts: () => dispatch(fetchProducts()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+);
