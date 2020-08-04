@@ -16,6 +16,7 @@ import {
   UPLOAD_PROGRESS,
   UPLOAD_FAILURE,
   UPLOAD_PRODUCT_DATA,
+  FETCH_PRODUCTS,
 } from "./constantType";
 
 // Sign-in actions
@@ -61,8 +62,9 @@ const fetchProducts = () => {
   return { type: FETCH_PRODUCTS_REQUEST };
 };
 
-const productSuccess = () => {
-  return { type: FETCH_PRODUCTS_SUCCESS };
+const productSuccess = (data) => {
+  console.log(data);
+  return { type: FETCH_PRODUCTS_SUCCESS, data };
 };
 
 const productError = (message) => {
@@ -76,6 +78,10 @@ const uploadFile = (file) => {
 
 const uploadFileSuccess = () => {
   return { type: UPLOAD_SUCCESS };
+};
+
+const uploadFileProgress = () => {
+  return { type: UPLOAD_PROGRESS };
 };
 
 const uploadFileError = (message) => {
@@ -102,6 +108,7 @@ export {
   productError,
   uploadFile,
   uploadFileSuccess,
+  uploadFileProgress,
   uploadFileError,
   uploadProductData,
 };

@@ -31,7 +31,7 @@ const Dashboard = (props) => {
       autoClose: 3000,
     });
   }
-  console.log(props);
+
   if (props.state.uploadReducer.uploadSuccess === true) {
     console.log("uploadFileSuccess");
     props.history.push("/");

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./HeadPhone.css";
+import { Link, withRouter } from "react-router-dom";
 
 export class HeadPhone extends Component {
   render() {
@@ -33,7 +34,7 @@ export class HeadPhone extends Component {
         <div className="container cart-btn text-left">
           <i class="fas fa-cart-plus"></i>
           <button type="button" className="btn btn-warning btn-lg mr-4">
-            ADD TO CART
+            <Link to="cart">ADD TO CART</Link>
           </button>
           <button type="button" className="btn btn-warning btn-lg mr-4">
             BUY NOW

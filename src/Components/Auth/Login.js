@@ -99,8 +99,4 @@ const mapStateToProps = (state) => ({
   signInSuccess: state.authReducer.signInSuccess,
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   signIn: (email, password) => dispatch(signIn(email, password)),
-// });
-
 export default connect(mapStateToProps, { signIn })(SignIn);
