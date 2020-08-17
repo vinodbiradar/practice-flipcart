@@ -33,7 +33,6 @@ const Dashboard = (props) => {
   }
 
   if (props.state.uploadReducer.uploadSuccess === true) {
-    console.log("uploadFileSuccess");
     props.history.push("/");
   }
 
@@ -114,7 +113,7 @@ const mapDispatchToProps = (dispatch) => ({
   uploadProductData: (name, price, description) =>
     dispatch(uploadProductData(name, price, description)),
   signIn: (email, password) => dispatch(signIn(email, password)),
-  fetchProducts: () => dispatch(fetchProducts()),
+  // fetchProducts: () => dispatch(fetchProducts()),
 });
 
 export default withRouter(

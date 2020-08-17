@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { signUp } from "../../store/Actions/auth.action";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "../Spinner";
 
 const SignUp = (props) => {
   const [name, setName] = useState("");
@@ -13,18 +14,27 @@ const SignUp = (props) => {
     props.signUp(name, email, password);
   }
 
-  if (props.signUpSuccess === true) {
+  if (props.signUpSuccess) {
     toast("Register Succefull!", {
       position: toast.POSITION.TOP_CENTER,
-      autoClose: 3000,
+      autoClose: 2000,
     });
     props.history.push("./");
   }
+
   return (
     <div className="row">
-      <div className="col-md-6 offset-md-3">
+      <div
+        className="col-md-6 offset-md-3"
+        style={{
+          border: "1px solid",
+          padding: "20px",
+          marginTop: "30px",
+          borderRadius: "20px",
+        }}
+      >
         <span className="text-center">
-          {props.signInLoading && <div>Loading ...</div>}
+          {props.signUpLoading ? <Spinner /> : ""}
         </span>
         <div className="form-group mt-4">
           <label for="exampleInputEmail1">Name</label>

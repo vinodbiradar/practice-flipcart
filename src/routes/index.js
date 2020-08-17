@@ -6,7 +6,8 @@ import More from "../components/more";
 import Cart from "../components/cart";
 import Home from "../components/layouts/Home";
 import Dashboard from "../components/layouts/Dashboard";
-import HeadPhone from "../components/products/items/HeadPhone";
+import ProductDetail from "../components/products/productdetail";
+import BuyProduct from "../components/products/BuyProduct";
 
 const routes = [
   {
@@ -40,15 +41,20 @@ const routes = [
     exact: true,
   },
   {
-    path: "/headPhone",
-    component: HeadPhone,
+    path: "/productdetail",
+    component: ProductDetail,
+    exact: true,
+  },
+  {
+    path: "/buyproduct",
+    component: BuyProduct,
     exact: true,
   },
 ];
 const Router = () => (
   <Switch>
-    {routes.map((_route) => (
-      <Route {..._route} />
+    {routes.map((_route, index) => (
+      <Route key={index} {..._route} />
     ))}
   </Switch>
 );

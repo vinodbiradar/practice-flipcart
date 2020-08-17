@@ -17,8 +17,9 @@ export class Header extends Component {
     let signInSuccess = this.props.signInSuccess;
     if (signInSuccess === undefined) signInSuccess = false;
 
-    console.log(loggedin);
-    console.log(signInSuccess);
+    let cartItems = sessionStorage.getItem("CartProducts")
+      ? JSON.parse(sessionStorage.getItem("CartProducts")).length
+      : 0;
 
     return (
       <div>
@@ -76,11 +77,7 @@ export class Header extends Component {
 
               {loggedin === "true" || signInSuccess === true ? (
                 <li className="nav-item active">
-                  <Link
-                    // to="#"
-                    className="nav-link"
-                    onClick={(e) => this.signOut(e)}
-                  >
+                  <Link className="nav-link" onClick={(e) => this.signOut(e)}>
                     Logout <span className="sr-only">(current)</span>
                   </Link>
                 </li>
@@ -94,7 +91,13 @@ export class Header extends Component {
               </li>
               <li className="nav-item active">
                 <Link to="/cart" className="nav-link">
-                  Cart <span className="sr-only">(current)</span>
+                  <span className="sr-only">(current)</span>
+                  <span>
+                    Cart{" "}
+                    <span class="badge badge-warning">
+                      {sessionStorage.getItem("CartProducts") ? cartItems : ""}
+                    </span>
+                  </span>
                 </Link>
               </li>
             </ul>

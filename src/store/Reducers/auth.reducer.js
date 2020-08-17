@@ -34,6 +34,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         signInError: true,
         signInSuccess: false,
+        signInLoading: false,
         signInMessage: action.message,
       };
 
@@ -42,6 +43,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
         signInSuccess: true,
+        signInLoading: false,
         signInMessage: "Sign In Success",
       };
 
@@ -49,12 +51,16 @@ const authReducer = (state = initialState, action) => {
       return initialState;
 
     case SIGNUPLOADING:
-      return { ...state, signUpLoading: true };
+      return {
+        ...state,
+        signUpLoading: true,
+      };
 
     case SIGNUPSUCCESS:
       return {
         ...state,
         signUpSuccess: true,
+        signUpLoading: false,
         signUpMessage: "Sign Up Success",
       };
 
@@ -62,6 +68,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         signUpError: true,
+        signUpLoading: false,
         signUpMessage: action.message,
       };
 

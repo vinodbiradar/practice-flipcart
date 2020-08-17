@@ -16,7 +16,8 @@ import {
   UPLOAD_PROGRESS,
   UPLOAD_FAILURE,
   UPLOAD_PRODUCT_DATA,
-  FETCH_PRODUCTS,
+  CART_PRODUCTS,
+  REMOVE_CART_PRODUCTS,
 } from "./constantType";
 
 // Sign-in actions
@@ -63,7 +64,6 @@ const fetchProducts = () => {
 };
 
 const productSuccess = (data) => {
-  console.log(data);
   return { type: FETCH_PRODUCTS_SUCCESS, data };
 };
 
@@ -72,6 +72,7 @@ const productError = (message) => {
 };
 
 // Uplaod actions
+
 const uploadFile = (file) => {
   return { type: UPLOAD_REQUEST, file };
 };
@@ -89,8 +90,15 @@ const uploadFileError = (message) => {
 };
 
 const uploadProductData = (name, price, description) => {
-  console.log("Upload data", name, price, description);
   return { type: UPLOAD_PRODUCT_DATA, name, price, description };
+};
+
+const cartProducts = (item) => {
+  return { type: CART_PRODUCTS, item };
+};
+
+const removeCartProducts = (item) => {
+  return { type: REMOVE_CART_PRODUCTS, item };
 };
 
 export {
@@ -111,4 +119,6 @@ export {
   uploadFileProgress,
   uploadFileError,
   uploadProductData,
+  cartProducts,
+  removeCartProducts,
 };

@@ -25,3 +25,16 @@ div.scrollmenu a:hover {
 .product-list {
   height: 200px;
 }
+.products {
+  margin-right: 50px;
+  margin-top: 50px;
+}
+
+.product-desc {
+  margin-top: 50px;
+}
+
+.but-btn {
+  background: #fb641b;
+  color: whitesmoke;
+}

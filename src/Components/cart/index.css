@@ -1,0 +1,12 @@
+.add-btn {
+  margin-right: 20px;
+}
+.remove-btn {
+  margin-left: 20px;
+}
+
+.itemTo-add-remove {
+  margin-left: 30;
+  margin-right: 30;
+  border-radius: 50px 1px solid;
+}

@@ -2,24 +2,23 @@ import {
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAILURE,
+  CART_PRODUCTS,
+  REMOVE_CART_PRODUCTS,
 } from "../Actions/constantType";
 
 const initialState = {
   loading: false,
-  loaded: false,
   products: [],
   error: null,
 };
 
 //defining the reducers function
 const productReducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case FETCH_PRODUCTS_REQUEST:
       return {
         ...state,
         loading: true,
-        // loaded: false,
       };
 
     case FETCH_PRODUCTS_SUCCESS:
@@ -33,7 +32,19 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        // loaded: false,
+        products: [],
+      };
+
+    case CART_PRODUCTS:
+      return {
+        ...state,
+        item: [],
+      };
+
+    case REMOVE_CART_PRODUCTS:
+      return {
+        ...state,
+        loading: false,
         products: [],
       };
 
