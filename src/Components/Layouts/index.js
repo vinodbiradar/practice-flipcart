@@ -22,8 +22,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    signInSuccess: state.authReducer.signInSuccess,
-    cartProducts: state.authReducer.cartProducts,
+    signInSuccess: state.auth.signInSuccess,
+    cartProducts: state.auth.cartProducts,
   };
 };
 

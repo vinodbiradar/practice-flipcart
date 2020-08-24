@@ -4,6 +4,7 @@ import { signUp } from "../../store/Actions/auth.action";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "../Spinner";
+import "./Index.css";
 
 const SignUp = (props) => {
   const [name, setName] = useState("");
@@ -24,15 +25,7 @@ const SignUp = (props) => {
 
   return (
     <div className="row">
-      <div
-        className="col-md-6 offset-md-3"
-        style={{
-          border: "1px solid",
-          padding: "20px",
-          marginTop: "30px",
-          borderRadius: "20px",
-        }}
-      >
+      <div className="col-md-6 offset-md-3 register-flex">
         <span className="text-center">
           {props.signUpLoading ? <Spinner /> : ""}
         </span>
@@ -87,10 +80,10 @@ const SignUp = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  signUpError: state.authReducer.signUpError,
-  signUpMessage: state.authReducer.signUpMessage,
-  signUpLoading: state.authReducer.signUpLoading,
-  signUpSuccess: state.authReducer.signUpSuccess,
+  signUpError: state.auth.signUpError,
+  signUpMessage: state.auth.signUpMessage,
+  signUpLoading: state.auth.signUpLoading,
+  signUpSuccess: state.auth.signUpSuccess,
 });
 
 const mapDispatchToProps = (dispatch) => ({

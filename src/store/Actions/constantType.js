@@ -1,23 +1,23 @@
-//SIGN-In actions
+//SIGN-In const
 export const SIGNIN = "SIGNIN";
 export const SIGNINLOADING = "SIGNINLOADING";
 export const SIGNINSUCCESS = "SIGNINSUCCESS";
 export const SIGNINERROR = "SIGNINERROR";
 export const CLEARSIGNINSTATE = "CLEARSIGNINSTATE";
 
-//SIGN-Up actions
+//SIGN-Up const
 export const SIGNUP = "SIGNUP";
 export const SIGNUPLOADING = "SIGNUPLOADING";
 export const SIGNUPSUCCESS = "SIGNUPSUCCESS";
 export const SIGNUPERROR = "SIGNUPERROR";
 export const CLEARSIGNUPSTATE = "CLEARSIGNUPSTATE";
 
-//Products actions
+//Products const
 export const FETCH_PRODUCTS_REQUEST = "FETCH_PRODUCTS_REQUEST";
 export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
 export const FETCH_PRODUCTS_FAILURE = "FETCH_PRODUCTS_FAILURE";
 
-//Upload actions
+//Upload const
 export const UPLOAD_REQUEST = "UPLOAD_REQUEST";
 export const UPLOAD_PRODUCT_DATA = "UPLOAD_PRODUCT_DATA";
 export const UPLOAD_PROGRESS = "UPLOAD_PROGRESS";
@@ -26,3 +26,6 @@ export const UPLOAD_FAILURE = "UPLOAD_FAILURE";
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 export const CART_PRODUCTS = "CART_PRODUCTS";
 export const REMOVE_CART_PRODUCTS = "REMOVE_CART_PRODUCTS";
+
+//SearchItems const
+export const FILTER_ITEMS = "FILTER_ITEMS";

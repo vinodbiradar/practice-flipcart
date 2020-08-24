@@ -17,7 +17,7 @@ import {
   UPLOAD_FAILURE,
   UPLOAD_PRODUCT_DATA,
   CART_PRODUCTS,
-  REMOVE_CART_PRODUCTS,
+  FILTER_ITEMS,
 } from "./constantType";
 
 // Sign-in actions
@@ -97,8 +97,8 @@ const cartProducts = (item) => {
   return { type: CART_PRODUCTS, item };
 };
 
-const removeCartProducts = (item) => {
-  return { type: REMOVE_CART_PRODUCTS, item };
+const searchProduct = (key) => {
+  return { type: FILTER_ITEMS, key };
 };
 
 export {
@@ -120,5 +120,5 @@ export {
   uploadFileError,
   uploadProductData,
   cartProducts,
-  removeCartProducts,
+  searchProduct,
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { fetchProducts, signIn } from "../../store/Actions/auth.action";
+import { signIn } from "../../store/Actions/auth.action";
 import { uploadFile, uploadProductData } from "../../store/Actions/auth.action";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,7 +32,7 @@ const Dashboard = (props) => {
     });
   }
 
-  if (props.state.uploadReducer.uploadSuccess === true) {
+  if (props.state.addData.uploadSuccess === true) {
     props.history.push("/");
   }
 

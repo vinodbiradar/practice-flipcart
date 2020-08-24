@@ -3,10 +3,36 @@
 }
 .remove-btn {
   margin-left: 20px;
+  text-align: left;
+  display: flex;
 }
 
 .itemTo-add-remove {
   margin-left: 30;
   margin-right: 30;
   border-radius: 50px 1px solid;
+  border: 1px solid;
+  padding: 5px;
+  border-radius: 5px;
+}
+.place__order {
+  color: white !important;
+  background: #fb641b;
+  text-align: right;
+}
+.decrease__item {
+  border-radius: 100%;
+}
+.remove__from__cart {
+  color: white;
+  text-align: right;
+}
+.price_detail {
+  position: fixed;
+  top: 15%;
+  right: 10%;
+}
+
+.price_detail {
+  display: inline;
 }

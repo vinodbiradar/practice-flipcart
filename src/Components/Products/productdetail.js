@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { cartProducts } from "../../store/Actions/auth.action";
 import { connect } from "react-redux";
+import "./ProductList.css";
 
 export class ProductDetail extends Component {
   addToCart() {
-    console.log("Cart item", this.props.location.state.item);
-
     var storageItems = sessionStorage.getItem("CartProducts");
     if (storageItems === null || storageItems === undefined) {
       let finalProducts = [];
@@ -27,12 +26,10 @@ export class ProductDetail extends Component {
       <div className="container">
         <div className="row">
           <div className="col-md-4 mt-4">
-            <p className="text-center mt-3">{item.name}</p>
+            <strong className="text-center mt-3 mb-3">{item.name}</strong>
             <img
-              width="350"
-              height="350"
               src={item.file}
-              className="img-responsive"
+              className="img-responsive product__details_image"
             />
             <div className="m-3 d-flex product-btn">
               <button
@@ -62,9 +59,18 @@ export class ProductDetail extends Component {
             </div>
           </div>
           <div className="col-md-6 offset-1 product-desc">
-            <div> Product Details : {item.description}</div>
-            <div> Price {item.price} $</div>
-            <div> Ratings : </div>
+            <div>
+              <br />
+              <strong>Product Details :</strong> {item.description}
+            </div>
+            <div>
+              <br />
+              <strong>Price :</strong> {item.price} $
+            </div>
+            <div>
+              <br />
+              <strong>Ratings :</strong>{" "}
+            </div>
           </div>
         </div>
       </div>

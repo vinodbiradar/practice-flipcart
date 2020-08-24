@@ -1,0 +1,18 @@
+.product__name {
+  text-align: center !important;
+  display: inline-block;
+  margin-top: 10px;
+  color: black;
+}
+.product__list {
+  display: inline-flex;
+  box-sizing: content-box;
+}
+
+.product__details_image {
+  vertical-align: middle;
+  border-style: none;
+  border: 1px solid;
+  padding: 20px;
+  border-radius: 10px;
+}

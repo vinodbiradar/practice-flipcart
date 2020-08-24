@@ -3,7 +3,6 @@ import {
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAILURE,
   CART_PRODUCTS,
-  REMOVE_CART_PRODUCTS,
 } from "../Actions/constantType";
 
 const initialState = {
@@ -39,13 +38,6 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         item: [],
-      };
-
-    case REMOVE_CART_PRODUCTS:
-      return {
-        ...state,
-        loading: false,
-        products: [],
       };
 
     default:

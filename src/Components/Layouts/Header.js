@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./Header.css";
 import logoImage from "./../../assets/flipkart-logo.png";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { searchProduct } from "../../store/Actions/auth.action";
 
 export class Header extends Component {
   signOut(e) {
@@ -9,6 +11,10 @@ export class Header extends Component {
     sessionStorage.clear();
     this.props.history.push("/login");
   }
+
+  handleChange = (searchTerm) => {
+    this.props.searchProduct(searchTerm);
+  };
 
   render() {
     let loggedin = sessionStorage.getItem("signInSuccess");
@@ -46,13 +52,8 @@ export class Header extends Component {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                onChange={(e) => this.handleChange(e.target.value)}
               />
-              <button
-                className="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
-                Search
-              </button>
             </form>
             <ul className="navbar-nav ml-auto">
               {loggedin === "false" && signInSuccess === false ? (
@@ -108,4 +109,9 @@ export class Header extends Component {
   }
 }
 
-export default withRouter(Header);
+const mapStateToProps = (state) => ({
+  state,
+  uploadFileLoading: state.auth.uploadFileLoading,
+});
+
+export default connect(mapStateToProps, { searchProduct })(Header);

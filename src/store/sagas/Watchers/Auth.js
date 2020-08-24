@@ -4,9 +4,7 @@ import {
   SIGNUP,
   FETCH_PRODUCTS_REQUEST,
   UPLOAD_REQUEST,
-  UPLOAD_PRODUCT_DATA,
   UPLOAD_SUCCESS,
-  FETCH_PRODUCTS,
   FETCH_PRODUCTS_SUCCESS,
 } from "../../Actions/constantType";
 import {
@@ -56,21 +54,6 @@ function* signUp(actions) {
     yield put(signUpError(error.message));
   }
 }
-
-//Product Sagas
-// function* fetchingProducts() {
-//   const database = firebase.database();
-//   const ref = database.ref("products");
-//   ref.on("value", gotData, errorData);
-// }
-
-// function gotData(data) {
-//   // console.log(data.val());
-// }
-
-// function errorData(error) {
-//   console.log("Error", error);
-// }
 
 //Upload Sagas
 function* uploadFile(action) {
@@ -124,15 +107,9 @@ function* fetchProducts() {
   const productRef = database.ref("ProductDescription");
   let product = yield productRef.once("value");
   yield put({ type: FETCH_PRODUCTS_SUCCESS, payload: product.val() });
+
+  console.log("Products ", product.val());
 }
-
-// function* productSuccess(data) {
-//   console.log("success Data", data);
-// }
-
-// function errorHandle(error) {
-//   console.log("Error", error);
-// }
 
 export default function* watchSignInSaga() {
   yield all([

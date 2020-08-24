@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import { signIn } from "../../store/Actions/auth.action";
 
 export class BuyProduct extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       productPrice: 1,
       removeProducts: 1,
@@ -21,6 +21,7 @@ export class BuyProduct extends Component {
     });
   }
   render() {
+    console.log(signIn(), this.props.signInSuccess);
     return (
       <>
         <div className="row">
